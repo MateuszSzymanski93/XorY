@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+        }
+        body
+        {
+            align-items: center;
+            height: 100vh;
+            background-color: darkslategrey;
+            display: flex;
+            justify-content: center;
+        }
+        .direction
+        {
+            color: blanchedalmond;
+            font-size: 40px;
+            margin: 100px;
+            text-align: center;
+        }
+    </style>
+        <p class="direction">Przeciągnij palcem po ekranie</p>
+    <script>
+        /* operatory porównania
+        8 == 3 - równa się, false
+        8 == 8 - równa się, true
+        8 != 3 - nie równa się, true
+        8 != 8 - nie równa się, false
+        3 < 7 - mniejsze, true
+        3 > 7 - większe, false
+        5 <= 5 - mniejsze lub równe, true
+        6 >= 9 - większe lub równe, false
+        */
+        
+        const DIRECTION = document.querySelector(".direction")
+
+        let Xstart
+        let Xend
+        let Ystart
+        let Yend
+        let startArr = []
+        let endArr = []
+
+        DIRECTION.addEventListener("click", function()
+        {
+            console.log("test")
+        });
+
+        addEventListener("touchstart", (e) =>
+        {
+            Xstart = event.touches[0].screenX;
+            Ystart = event.touches[0].screenY;  
+            //console.log("start touch Y position", Ystart);
+            //console.log("start touch X position", Xstart);
+            startArr = [Xstart, Ystart];
+            //console.log(startArr);
+            return startArr
+        });
+
+        addEventListener("touchend", (event) => 
+        {   
+            Xend = event.changedTouches[0].screenX;
+            Yend = event.changedTouches[0].screenY; 
+            //console.log("end touch Y position", Yend);
+            // console.log("end touch X position", Xend);
+            endArr = [Xend, Yend];
+            //console.log(endArr);
+            xory(startArr, endArr);
+            return endArr
+        });
+
+        function xory (startArr, endArr)
+        {
+            let sx = (startArr[0]);
+            let ex = (endArr[0]);
+            let sy = (startArr[1]);
+            let ey = (endArr[1]);
+            let X = sx - ex
+            let Y = sy - ey
+
+            //console.log("X = ", (X))
+            //console.log("Y = ", (Y))
+
+
+            if(Math.abs(X) > Math.abs(Y))
+            {
+                if(X > 0)
+                {
+                DIRECTION.innerText = "LEWO"
+                console.log("lewo");
+                }
+                if(X < 0)
+                {
+                DIRECTION.innerText = "PRAWO"
+                console.log("prawo")
+                }
+            }
+            if(Math.abs(X) < Math.abs(Y))
+            {
+                if(Y > 0)
+                {
+                DIRECTION.innerText = "GÓRA"
+                console.log("góra")
+                }
+                if(Y < 0)
+                {
+                DIRECTION.innerText = "DÓŁ"
+                console.log("dół")
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>
